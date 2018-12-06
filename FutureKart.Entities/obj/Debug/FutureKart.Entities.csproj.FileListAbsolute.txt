@@ -1,0 +1,17 @@
+D:\training\mvc\FutureKart\FutureKart.Entities\bin\Debug\FutureKart.Entities.dll.config
+D:\training\mvc\FutureKart\FutureKart.Entities\bin\Debug\FutureKart.Entities.dll
+D:\training\mvc\FutureKart\FutureKart.Entities\bin\Debug\FutureKart.Entities.pdb
+D:\training\mvc\FutureKart\FutureKart.Entities\bin\Debug\AutoMapper.dll
+D:\training\mvc\FutureKart\FutureKart.Entities\bin\Debug\EntityFramework.dll
+D:\training\mvc\FutureKart\FutureKart.Entities\bin\Debug\EntityFramework.SqlServer.dll
+D:\training\mvc\FutureKart\FutureKart.Entities\bin\Debug\System.ValueTuple.dll
+D:\training\mvc\FutureKart\FutureKart.Entities\bin\Debug\AutoMapper.pdb
+D:\training\mvc\FutureKart\FutureKart.Entities\bin\Debug\AutoMapper.xml
+D:\training\mvc\FutureKart\FutureKart.Entities\bin\Debug\EntityFramework.xml
+D:\training\mvc\FutureKart\FutureKart.Entities\bin\Debug\EntityFramework.SqlServer.xml
+D:\training\mvc\FutureKart\FutureKart.Entities\bin\Debug\System.ValueTuple.xml
+D:\training\mvc\FutureKart\FutureKart.Entities\obj\Debug\FutureKart.Entities.csprojAssemblyReference.cache
+D:\training\mvc\FutureKart\FutureKart.Entities\obj\Debug\FutureKart.Entities.csproj.CoreCompileInputs.cache
+D:\training\mvc\FutureKart\FutureKart.Entities\obj\Debug\FutureKart.Entities.csproj.CopyComplete
+D:\training\mvc\FutureKart\FutureKart.Entities\obj\Debug\FutureKart.Entities.dll
+D:\training\mvc\FutureKart\FutureKart.Entities\obj\Debug\FutureKart.Entities.pdb

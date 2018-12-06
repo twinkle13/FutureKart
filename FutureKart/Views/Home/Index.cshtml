@@ -1,0 +1,29 @@
+﻿@model FutureKart.View_Models.AnalyticsViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+<h2>Our top Selling Products</h2>
+@foreach (var category in Model.CategoryProducts)
+{
+    <div class="row"><h3>@category.Name</h3></div>
+    <div class="row">
+        <div class="row row-pb-md">
+
+            
+            @foreach (var product in category.Products)
+            {
+                <div class="col-md-3 col-lg-3 mb-4 text-center">
+                    <div class="product-entry border">
+                        
+                        <div class="desc">
+                            <h2>@product.Name</h2>
+                           <h6>@product.Description</h6>
+                        </div>
+                      
+                    </div>
+                </div>
+            }
+            
+        </div>
+    </div>
+}
