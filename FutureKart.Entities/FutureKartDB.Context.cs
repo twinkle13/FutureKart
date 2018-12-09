@@ -44,15 +44,6 @@ namespace FutureKart.Entities
         public virtual DbSet<VariantImage> VariantImages { get; set; }
         public virtual DbSet<VariantPropertyValue> VariantPropertyValues { get; set; }
     
-        public virtual int AddValue(string name, ObjectParameter valueID)
-        {
-            var nameParameter = name != null ?
-                new ObjectParameter("Name", name) :
-                new ObjectParameter("Name", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddValue", nameParameter, valueID);
-        }
-    
         public virtual int AddAddress(Nullable<System.Guid> userID, string addressLine1, Nullable<int> pin, string city, string state, string country, string addressLine2)
         {
             var userIDParameter = userID.HasValue ?
@@ -263,6 +254,15 @@ namespace FutureKart.Entities
                 new ObjectParameter("RoleName", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddUser", userNameParameter, hashPasswordParameter, emailParameter, phoneNumberParameter, roleNameParameter);
+        }
+    
+        public virtual int AddValue(string name, ObjectParameter valueID)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddValue", nameParameter, valueID);
         }
     
         public virtual ObjectResult<Nullable<System.Guid>> AddVariant(Nullable<System.Guid> productID, Nullable<double> listingPrice, Nullable<double> discount, Nullable<int> quantitySold, Nullable<int> inventory, string propertyName, string valueName, string variantImage)

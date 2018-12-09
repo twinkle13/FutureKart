@@ -18,6 +18,11 @@ namespace FutureKart
                 defaults: new { controller = "Registration", action = "Register" }
                 );
             routes.MapRoute(
+                name: "ProductDetail",
+                url: "Product/ProductDetail/{ProductID}",
+                defaults: new { controller = "Product", action = "ProductDetail" }
+                );
+            routes.MapRoute(
                 name: "Login",
                 url: "Login",
                 defaults: new { controller = "Login", action = "Login" }

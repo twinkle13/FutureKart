@@ -76,6 +76,7 @@
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="OrderLimit" ColumnName="OrderLimit" />
           <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="TotalVariantsSold" ColumnName="TotalVariantsSold" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -163,7 +164,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="AddValue" FunctionName="FutureKartModel.Store.AddValue" />
     <FunctionImportMapping FunctionImportName="AddAddress" FunctionName="FutureKartModel.Store.AddAddress" />
     <FunctionImportMapping FunctionImportName="addCategory" FunctionName="FutureKartModel.Store.addCategory" />
     <FunctionImportMapping FunctionImportName="AddItem" FunctionName="FutureKartModel.Store.AddItem" />
@@ -172,6 +172,7 @@
     <FunctionImportMapping FunctionImportName="AddRole" FunctionName="FutureKartModel.Store.AddRole" />
     <FunctionImportMapping FunctionImportName="AddToCart" FunctionName="FutureKartModel.Store.AddToCart" />
     <FunctionImportMapping FunctionImportName="AddUser" FunctionName="FutureKartModel.Store.AddUser" />
+    <FunctionImportMapping FunctionImportName="AddValue" FunctionName="FutureKartModel.Store.AddValue" />
     <FunctionImportMapping FunctionImportName="AddVariant" FunctionName="FutureKartModel.Store.AddVariant" />
     <FunctionImportMapping FunctionImportName="AddVariantImage" FunctionName="FutureKartModel.Store.AddVariantImage" />
     <FunctionImportMapping FunctionImportName="AddVariantPropertyValueMapping" FunctionName="FutureKartModel.Store.AddVariantPropertyValueMapping" />

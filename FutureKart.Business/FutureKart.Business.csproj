@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CartBusinessContext.cs" />
     <Compile Include="PasswordHasher.cs" />
     <Compile Include="ProductBusinessContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

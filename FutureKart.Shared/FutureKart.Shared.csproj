@@ -56,6 +56,9 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="DTO\Analytics\AnalyticsDTO.cs" />
+    <Compile Include="DTO\Cart\CartDTO.cs" />
+    <Compile Include="DTO\Cart\CartItemsDTO.cs" />
+    <Compile Include="DTO\Cart\CartProductsDTO.cs" />
     <Compile Include="DTO\Category\CategoryDTO.cs" />
     <Compile Include="DTO\Category\CategoryProductsDTO.cs" />
     <Compile Include="DTO\Product\ProductDTO.cs" />
@@ -65,10 +68,15 @@
     <Compile Include="DTO\User\UserLoginDTO.cs" />
     <Compile Include="DTO\User\UserRegisterDTO.cs" />
     <Compile Include="DTO\Variant\VariantDTO.cs" />
+    <Compile Include="DTO\Variant\VariantImageDTO.cs" />
     <Compile Include="Exceptions\EmailAlreadyExistsException.cs" />
     <Compile Include="Exceptions\IncorrectPasswordException.cs" />
     <Compile Include="Exceptions\InvalidLoginException.cs" />
+    <Compile Include="Exceptions\ItemAlreadyInCartException.cs" />
     <Compile Include="Exceptions\NoRolesFoundException.cs" />
+    <Compile Include="Exceptions\OrderLimitExceedException.cs" />
+    <Compile Include="Exceptions\ProductDoesNotExistsException.cs" />
+    <Compile Include="Exceptions\QuantityUnavailableException.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

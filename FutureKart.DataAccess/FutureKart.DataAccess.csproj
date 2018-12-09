@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CartDatabaseContext.cs" />
     <Compile Include="ProductDatabaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserDatabaseContext.cs" />

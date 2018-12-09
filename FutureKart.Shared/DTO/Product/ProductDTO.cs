@@ -10,13 +10,14 @@ namespace FutureKart.Shared.DTO.Product
 {
     public class ProductDTO
     {
+        public System.Guid ID { get; set; }
         public IEnumerable<VariantDTO> Variants { get; set; }
         public CategoryProductsDTO Category { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Title { get; set; }
         public int OrderLimit { get; set; }
-        public int VariantsSold { get; set; }
+        public int TotalVariantsSold { get; set; }
         public string ProductImageURL { get; set; }
     }
 }

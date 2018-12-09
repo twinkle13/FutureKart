@@ -3,27 +3,47 @@
     ViewBag.Title = "Home Page";
 }
 <h2>Our top Selling Products</h2>
+
 @foreach (var category in Model.CategoryProducts)
 {
-    <div class="row"><h3>@category.Name</h3></div>
+    <div class="row"><h3>@category.Name.ToUpper()</h3></div>
     <div class="row">
         <div class="row row-pb-md">
-
-            
             @foreach (var product in category.Products)
             {
                 <div class="col-md-3 col-lg-3 mb-4 text-center">
                     <div class="product-entry border">
-                        
-                        <div class="desc">
-                            <h2>@product.Name</h2>
-                           <h6>@product.Description</h6>
-                        </div>
-                      
+                        <a href="@Url.Action("ProductDetail", "Product", new { ProductID = product.ID })">
+                            @foreach (var Variants in product.Variants)
+                            {
+                                foreach (var Image in Variants.VariantImages)
+                                {
+                                    <img src="@Image.ImageURL" class="img-fluid" alt="Image Not Vailable" style=" height:140px;width:200px;">
+                                }
+                            }
+                                    <div class="productname">
+                                        <h3>@product.Name.ToUpper()</h3>
+                                        <h3>@product.Title</h3>
+                                        <h3>@product.ID</h3>
+                                    </div>
+                            <div class="desc">
+                                <h4>@product.Description</h4>
+                            </div>
+                            <div class="price-info">
+                                @foreach (var Variants in product.Variants)
+                                {
+                                    <h5>Rupee- @Variants.ListingPrice</h5>
+                                    if (Variants.Discount != 0)
+                                    {
+                                        <p>Discount Available</p>
+                                        <p>@Variants.Discount</p>
+                                    }
+                                }
+                            </div>
+                        </a>
                     </div>
                 </div>
             }
-            
         </div>
     </div>
 }
