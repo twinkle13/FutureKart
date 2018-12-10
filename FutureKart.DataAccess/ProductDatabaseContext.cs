@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FutureKart.Entities;
 using FutureKart.Shared.DTO.Analytics;
+using FutureKart.Shared.DTO.Cart;
 using FutureKart.Shared.DTO.Category;
 using FutureKart.Shared.DTO.Product;
 using FutureKart.Shared.DTO.Variant;
@@ -55,6 +56,17 @@ namespace FutureKart.DataAccess
                 CategoryProducts = AnalyticsMapper.Map<IEnumerable<Category>, IEnumerable<CategoryProductsDTO>>(categories)
             };
             return analyticsDTO;
+        }
+
+        public void UpdateInventory(CartItemsDTO cartItemsDTO)
+        {
+            foreach (CartProductsDTO cartItem in cartItemsDTO.CartItems) {
+                futureKartEntities.Variants.FirstOrDefault(v => v.ID == cartItem.Variant.ID).Inventory -= cartItem.Quantity;
+                futureKartEntities.Variants.FirstOrDefault(v => v.ID == cartItem.Variant.ID).QuantitySold += cartItem.Quantity;
+                futureKartEntities.Categories.FirstOrDefault(c => c.ID == cartItem.Variant.Product.Category.ID).ProductsSold += cartItem.Quantity;
+                futureKartEntities.SaveChanges();
+            }
+            return;
         }
 
         public ProductDTO GetProduct(Guid productID)

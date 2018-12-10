@@ -49,6 +49,14 @@ namespace FutureKart.DataAccess
             }
             return OrderLimit.GetValueOrDefault();
         }
+
+        public void EmptyCart(Guid userID)
+        {
+            FutureKartDBObject.CartVariantMappings.RemoveRange(FutureKartDBObject.CartVariantMappings.Where(c => c.CartID == userID));
+            FutureKartDBObject.SaveChanges();
+            return;
+        }
+
         private bool isItemPresent(CartDTO cartDTO)
         {
             CartVariantMapping cart=  FutureKartDBObject.CartVariantMappings.Where(c => c.CartID == cartDTO.UserID && c.VariantID == cartDTO.VariantID).FirstOrDefault();

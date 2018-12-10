@@ -12,5 +12,6 @@ namespace FutureKart.Shared.DTO.Category
         public IEnumerable<ProductDTO> Products { get; set; }
         public string Name { get; set; }
         public int ProductsSold { get; set; }
+        public Guid ID { get; set; }
     }
 }

@@ -70,7 +70,10 @@
                                     @if (Model.CartItems.Count() != 0)
                                     {
                                         <div class="col-sm-3">
-                                            <a href="@Url.Action("Checkout", "Order")" class="btn btn-primary">Checkout</a>
+                                            <a href="@Url.Action("SelectAddress", "Address")" class="btn btn-primary">Checkout On Existing Address</a>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <a href="@Url.Action("AddAddress", "Address")" class="btn btn-primary">Checkout On New Address</a>
                                         </div>
                                     }
                                 </div>

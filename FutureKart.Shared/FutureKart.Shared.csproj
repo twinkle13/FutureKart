@@ -55,12 +55,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="DTO\Address\AddressDTO.cs" />
     <Compile Include="DTO\Analytics\AnalyticsDTO.cs" />
     <Compile Include="DTO\Cart\CartDTO.cs" />
     <Compile Include="DTO\Cart\CartItemsDTO.cs" />
     <Compile Include="DTO\Cart\CartProductsDTO.cs" />
     <Compile Include="DTO\Category\CategoryDTO.cs" />
     <Compile Include="DTO\Category\CategoryProductsDTO.cs" />
+    <Compile Include="DTO\Order\OrderDTO.cs" />
+    <Compile Include="DTO\Order\OrderPlacedVariantDTO.cs" />
+    <Compile Include="DTO\Order\OrderProductDTO.cs" />
+    <Compile Include="DTO\Order\OrdersDTO.cs" />
     <Compile Include="DTO\Product\ProductDTO.cs" />
     <Compile Include="DTO\Role\RoleDTO.cs" />
     <Compile Include="DTO\Role\RolesDTO.cs" />
@@ -69,10 +74,12 @@
     <Compile Include="DTO\User\UserRegisterDTO.cs" />
     <Compile Include="DTO\Variant\VariantDTO.cs" />
     <Compile Include="DTO\Variant\VariantImageDTO.cs" />
+    <Compile Include="Exceptions\CartEmptyException.cs" />
     <Compile Include="Exceptions\EmailAlreadyExistsException.cs" />
     <Compile Include="Exceptions\IncorrectPasswordException.cs" />
     <Compile Include="Exceptions\InvalidLoginException.cs" />
     <Compile Include="Exceptions\ItemAlreadyInCartException.cs" />
+    <Compile Include="Exceptions\NoOrderException.cs" />
     <Compile Include="Exceptions\NoRolesFoundException.cs" />
     <Compile Include="Exceptions\OrderLimitExceedException.cs" />
     <Compile Include="Exceptions\ProductDoesNotExistsException.cs" />
@@ -84,5 +91,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

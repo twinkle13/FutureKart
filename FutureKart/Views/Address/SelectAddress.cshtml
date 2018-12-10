@@ -1,0 +1,37 @@
+﻿@model FutureKart.View_Models.SelectAddressViewModel
+@{
+    ViewBag.Title = "SelectAddress";
+}
+
+@using (Html.BeginForm("SelectAddress", "Address", FormMethod.Post, new { @class = "colorlib-form" }))
+{
+    <h2>SelectAddress</h2>
+    <div>
+        <div>
+            @if (Model.Addresses.ToList().Count != 0)
+            {
+                foreach (var address in Model.Addresses)
+                {
+                    <p>
+                        @Html.RadioButtonFor(b => b.AddressID, address.ID) @address.AddressLine1, @address.AddressLine2, @address.City, @address.State, @address.PIN,@address.Country
+                    </p>
+                }
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p><button class="btn btn-primary" type="submit">Place an order</button></p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p>No existing addresses. Please Add New Address.</p>
+                <div>
+                    <div class="col-sm-3">
+                        <a href="@Url.Action("AddAddress", "Address")" class="btn btn-primary">Add New Address</a>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+}
