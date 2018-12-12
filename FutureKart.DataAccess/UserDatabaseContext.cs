@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
+using System.Diagnostics;
 
 namespace FutureKart.DataAccess
 {
@@ -48,6 +50,7 @@ namespace FutureKart.DataAccess
         public bool UserEmailExists(string RegisterEmail)
         {
             User user = FutureKartContext.Users.Where(a => a.Email == RegisterEmail).FirstOrDefault();
+            Debug.WriteLine(FutureKartContext.Users.Where(a => a.Email == RegisterEmail).FirstOrDefault());
             if(user == null)
             {
                 return false;
@@ -61,6 +64,7 @@ namespace FutureKart.DataAccess
         public UserInfoDTO GetUser(UserLoginDTO loggedInUserCredentialsDTO)
         {
             User user = FutureKartContext.Users.Where(u => u.Email == loggedInUserCredentialsDTO.Email).FirstOrDefault();
+            Debug.WriteLine(FutureKartContext.Users.Where(u => u.Email == loggedInUserCredentialsDTO.Email).FirstOrDefault());
             if(user != null)
             {
                 UserInfoDTO userDetailsDTO = UserInfoMapper.Map<User, UserInfoDTO>(user);
@@ -75,6 +79,7 @@ namespace FutureKart.DataAccess
         public RolesDTO GetRoles()
         {
             List<Role> roleList = FutureKartContext.Roles.Where(r => r.Name != "ADMIN").ToList();
+            Debug.WriteLine(FutureKartContext.Roles.Where(r => r.Name != "ADMIN").ToList());
             if(roleList.Count()<=0)
             {
                 throw new NoRolesFoundException("No roles found exception");
@@ -86,11 +91,31 @@ namespace FutureKart.DataAccess
             
         }
 
+        public bool CheckAdmin(Guid userID)
+        {
+            
+            User user = FutureKartContext.Users.Where(u => u.ID == userID).Include(u => u.Role).First();
+            Debug.WriteLine(FutureKartContext.Users.Where(u => u.ID == userID).Include(u => u.Role).First());
+            string role = FutureKartContext.Roles.Where(r => r.ID == user.RoleID).Select(r => r.Name).FirstOrDefault();
+            Debug.WriteLine(FutureKartContext.Roles.Where(r => r.ID == user.RoleID).Select(r => r.Name).FirstOrDefault());
+
+            if (role.ToUpper() == "ADMIN")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
         public UserInfoDTO AddUser(UserRegisterDTO userDTO)
         {
             User user = RegisterUserMapper.Map<UserRegisterDTO, User>(userDTO);
             user.ID = Guid.NewGuid();
             user.RoleID = FutureKartContext.Roles.Where(s => s.Name == userDTO.RoleName).Select(a => a.ID).FirstOrDefault();
+            Debug.WriteLine(FutureKartContext.Roles.Where(s => s.Name == userDTO.RoleName).Select(a => a.ID).FirstOrDefault());
             FutureKartContext.Users.Add(user);
             FutureKartContext.SaveChanges();
             UserInfoDTO newUserInfoDTO = UserInfoMapper.Map<User, UserInfoDTO>(user);

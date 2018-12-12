@@ -1,0 +1,13 @@
+﻿@model FutureKart.View_Models.CategoriesProductViewModel
+    <div class="container">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+
+                @foreach (string category in Model.categories)
+                {
+                    <li>@Html.ActionLink(category,"GetCategoryProducts","Category", new { CategoryName = category },null)</li>
+                }
+            </ul>
+        </div>
+
+    </div>

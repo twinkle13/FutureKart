@@ -11,6 +11,7 @@ using FutureKart.Shared.DTO.Variant;
 using FutureKart.Shared.DTO.Address;
 using FutureKart.Shared.DTO.Product;
 using FutureKart.Shared.DTO.Category;
+using System.Diagnostics;
 
 namespace FutureKart.DataAccess
 {
@@ -34,6 +35,14 @@ namespace FutureKart.DataAccess
            });
             orderMapper = new Mapper(configOrder);
         }
+
+        public string GetOrderStatus(int statusID)
+        {
+           string status =  FutureKartContext.Status.Where(s => s.ID == statusID).Select(s => s.description).FirstOrDefault();
+            Debug.WriteLine(FutureKartContext.Status.Where(s => s.ID == statusID).Select(s => s.description).FirstOrDefault());
+            return status;
+        }
+
         public void PlaceOrder(Guid userID, Guid addressID, Shared.DTO.Cart.CartItemsDTO cartItemsDTO)
         {
             Guid OrderId = Guid.NewGuid();
@@ -56,10 +65,13 @@ namespace FutureKart.DataAccess
         public OrdersDTO GetOrders(Guid userID)
         {
             IEnumerable<Guid> OrderPlacedID = FutureKartContext.OrderPlaceds.Where(c => c.UserID == userID).Select(o => o.OrderID).ToList();
+            Debug.WriteLine(FutureKartContext.OrderPlaceds.Where(c => c.UserID == userID).Select(o => o.OrderID).ToList());
             List<Order> orderList = new List<Order>();
             foreach (Guid orderID in OrderPlacedID)
             {
                 Order order = FutureKartContext.Orders.Where(c => c.ID == orderID).FirstOrDefault();
+                Debug.WriteLine(FutureKartContext.Orders.Where(c => c.ID == orderID).FirstOrDefault());
+
                 orderList.Add(order);
             }
             OrdersDTO orderInfo = new OrdersDTO();
@@ -68,9 +80,18 @@ namespace FutureKart.DataAccess
 
         }
 
+        public OrderDTO GetOrder(Guid orderID)
+        {
+            Order order = FutureKartContext.Orders.Where(o => o.ID == orderID).FirstOrDefault();
+            Debug.WriteLine(FutureKartContext.Orders.Where(o => o.ID == orderID).FirstOrDefault());
+            OrderDTO orderDTO = orderMapper.Map<Order, OrderDTO>(order);
+            return orderDTO;
+        }
+
         public bool checkItemsExistInCart(Guid userID)
         {
             int cartExist = FutureKartContext.CartVariantMappings.Include(c => c.VariantID).Where(c => c.CartID == userID).Count();
+            Debug.WriteLine(FutureKartContext.CartVariantMappings.Include(c => c.VariantID).Where(c => c.CartID == userID).Count());
             if (cartExist  > 0)
             {
                 return true;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,18 +32,22 @@ namespace FutureKart.DataAccess
         {
 
             int quantity = FutureKartDBObject.CartVariantMappings.Where(c => c.CartID == cartDTO.UserID && c.VariantID == cartDTO.VariantID).Select(c => c.Quantity).FirstOrDefault();
-            
+            Debug.WriteLine(FutureKartDBObject.CartVariantMappings.Where(c => c.CartID == cartDTO.UserID && c.VariantID == cartDTO.VariantID).Select(c => c.Quantity).FirstOrDefault());
             return quantity;
         }
         public int GetInventory(CartDTO cartDTO)
         {
             int Inventory = FutureKartDBObject.Variants.Where(v => v.ID == cartDTO.VariantID).Select(v => v.Inventory).FirstOrDefault();
+            Debug.Write(FutureKartDBObject.Variants.Where(v => v.ID == cartDTO.VariantID).Select(v => v.Inventory).FirstOrDefault());
             return Inventory;
         }
         public int GetOrderLimit(CartDTO cartDTO)
         {
             Guid ProductID = FutureKartDBObject.Variants.Where(v => v.ID == cartDTO.VariantID).Select(v=>v.ProductID).FirstOrDefault();
-            var OrderLimit = FutureKartDBObject.Products.Where(p => p.ID == ProductID).Select(p => p.OrderLimit).FirstOrDefault(); 
+            var OrderLimit = FutureKartDBObject.Products.Where(p => p.ID == ProductID).Select(p => p.OrderLimit).FirstOrDefault();
+            Debug.WriteLine(FutureKartDBObject.Variants.Where(v => v.ID == cartDTO.VariantID).Select(v => v.ProductID).FirstOrDefault());
+            Debug.WriteLine(FutureKartDBObject.Products.Where(p => p.ID == ProductID).Select(p => p.OrderLimit).FirstOrDefault());
+
             if(OrderLimit == null)
             {
                 return GetInventory(cartDTO);
@@ -53,6 +58,7 @@ namespace FutureKart.DataAccess
         public void EmptyCart(Guid userID)
         {
             FutureKartDBObject.CartVariantMappings.RemoveRange(FutureKartDBObject.CartVariantMappings.Where(c => c.CartID == userID));
+            Debug.WriteLine(FutureKartDBObject.CartVariantMappings.RemoveRange(FutureKartDBObject.CartVariantMappings.Where(c => c.CartID == userID)));
             FutureKartDBObject.SaveChanges();
             return;
         }
@@ -60,7 +66,8 @@ namespace FutureKart.DataAccess
         private bool isItemPresent(CartDTO cartDTO)
         {
             CartVariantMapping cart=  FutureKartDBObject.CartVariantMappings.Where(c => c.CartID == cartDTO.UserID && c.VariantID == cartDTO.VariantID).FirstOrDefault();
-            if(cart != null)
+            Debug.WriteLine(FutureKartDBObject.CartVariantMappings.Where(c => c.CartID == cartDTO.UserID && c.VariantID == cartDTO.VariantID).FirstOrDefault());
+            if (cart != null)
             {
                 return true;
             }
@@ -76,6 +83,7 @@ namespace FutureKart.DataAccess
             if (isItemPresent(cartDTO))
             {
                 cart = FutureKartDBObject.CartVariantMappings.Where(c => c.CartID == cartDTO.UserID && c.VariantID == cartDTO.VariantID).FirstOrDefault();
+                Debug.WriteLine(FutureKartDBObject.CartVariantMappings.Where(c => c.CartID == cartDTO.UserID && c.VariantID == cartDTO.VariantID).FirstOrDefault());
                 cart.Quantity = cartDTO.Quantity;
             }
             else
@@ -92,6 +100,10 @@ namespace FutureKart.DataAccess
         {
             double ListingPrice = FutureKartDBObject.Variants.Where(v => v.ID == VariantID).Select(v => v.ListingPrice).FirstOrDefault();
             double Discount = FutureKartDBObject.Variants.Where(v => v.ID == VariantID).Select(v => v.Discount).FirstOrDefault();
+
+            Debug.WriteLine(FutureKartDBObject.Variants.Where(v => v.ID == VariantID).Select(v => v.ListingPrice).FirstOrDefault());
+            Debug.WriteLine(FutureKartDBObject.Variants.Where(v => v.ID == VariantID).Select(v => v.Discount).FirstOrDefault());
+            
             double SellingPrice = ListingPrice - Discount * ListingPrice / 100;
             return SellingPrice;
         }
@@ -99,6 +111,7 @@ namespace FutureKart.DataAccess
         public CartItemsDTO GetCart(Guid UserID)
         {
             var cartItems = FutureKartDBObject.CartVariantMappings.Where(c => c.CartID == UserID).ToList();
+            Debug.WriteLine(FutureKartDBObject.CartVariantMappings.Where(c => c.CartID == UserID).ToList());
             CartItemsDTO cartItemsDTO = new CartItemsDTO();
             cartItemsDTO.CartItems = CartItemsMapper.Map<IEnumerable<CartVariantMapping>, IEnumerable<CartProductsDTO>>(cartItems);
             return cartItemsDTO;
@@ -107,6 +120,7 @@ namespace FutureKart.DataAccess
         public void RemoveItem(Guid UserID, Guid VariantID)
         {
             FutureKartDBObject.CartVariantMappings.RemoveRange(FutureKartDBObject.CartVariantMappings.Where(c => c.CartID == UserID && c.VariantID == VariantID));
+            Debug.WriteLine(FutureKartDBObject.CartVariantMappings.RemoveRange(FutureKartDBObject.CartVariantMappings.Where(c => c.CartID == UserID && c.VariantID == VariantID)));
             FutureKartDBObject.SaveChanges();
         }
 

@@ -3,6 +3,7 @@ using FutureKart.Business;
 using FutureKart.Shared.DTO.Analytics;
 using FutureKart.Shared.DTO.Category;
 using FutureKart.Shared.DTO.Product;
+using FutureKart.Shared.DTO.Variant;
 using FutureKart.View_Models;
 using System;
 using System.Collections.Generic;
@@ -22,27 +23,35 @@ namespace FutureKart.Controllers
                 cfg.CreateMap<AnalyticsDTO, AnalyticsViewModel>();
                 cfg.CreateMap<CategoryProductsDTO, CategoryProductViewModel>();
                 cfg.CreateMap<ProductDTO, ProductViewModel>();
+                cfg.CreateMap<VariantDTO, VariantViewModel>();
+                cfg.CreateMap<VariantImageDTO, VariantImageViewModel>();
+
+
             });
             AnalyticsMapper = new Mapper(AnalyticsConfig);
         }
         public ActionResult Index()
         {
-            if(Session["UserID"] != null)
-            {
-                ViewBag.IsLoggedIn = "True";
-            }
-            AnalyticsDTO analyticsDTO = new AnalyticsDTO();
-            ProductBusinessContext productBusinessContext = new ProductBusinessContext();
-            AnalyticsViewModel analyticsViewModel = new AnalyticsViewModel();
             try
             {
-                analyticsDTO = productBusinessContext.GetTopProductsByCart();
-                analyticsViewModel = AnalyticsMapper.Map<AnalyticsDTO, AnalyticsViewModel>(analyticsDTO);
-                return View(analyticsViewModel);
-            }
-            catch (Exception e)
+                IEnumerable<CategoryDTO> categoryDTOs;
+
+                AnalyticsDTO analyticsDTO = new AnalyticsDTO();
+                ProductBusinessContext productBusinessContext = new ProductBusinessContext();
+                AnalyticsViewModel analyticsViewModel = new AnalyticsViewModel();
+                try
+                {
+                    analyticsDTO = productBusinessContext.GetTopProductsByCart();
+                    analyticsViewModel = AnalyticsMapper.Map<AnalyticsDTO, AnalyticsViewModel>(analyticsDTO);
+                    return View(analyticsViewModel);
+                }
+                catch (Exception e)
+                {
+                    return View("Internal Error");
+                }
+            }catch(Exception ex)
             {
-                return View("Internal Error");
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
             }
             
         }

@@ -1,6 +1,8 @@
 ﻿using FutureKart.DataAccess;
 using FutureKart.Shared.DTO.Analytics;
+using FutureKart.Shared.DTO.Category;
 using FutureKart.Shared.DTO.Product;
+using FutureKart.Shared.DTO.Variant;
 using FutureKart.Shared.Exceptions;
 using System;
 using System.Collections.Generic;
@@ -28,7 +30,6 @@ namespace FutureKart.Business
                 {
                     category.Products = category.Products.Take(5);
                 }
-                //setProductImage(category.Products);
 
                 CategoryCounter++;
 
@@ -45,6 +46,21 @@ namespace FutureKart.Business
             }
         }
 
+        public ProductsSearchedResultDTO SearchProductsWithString(string searchString)
+        {
+            ProductsSearchedResultDTO newProductsSearchResultDTO = new ProductsSearchedResultDTO();
+
+            try
+            {
+                newProductsSearchResultDTO = productDatabaseContext.SearchProductsWithString(searchString);
+                return newProductsSearchResultDTO;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unknown Error");
+            }
+        }
+
         public ProductDTO GetProduct(Guid productID)
         {
             bool exists = productDatabaseContext.ProductExists(productID);
@@ -55,6 +71,24 @@ namespace FutureKart.Business
             ProductDTO productDTO = productDatabaseContext.GetProduct(productID);
             return productDTO;
 
+        }
+
+        public CategoryProductsDTO GetCategoryProducts(string CategoryName)
+        {
+            
+            bool exists = productDatabaseContext.CategoryExists(CategoryName);                 
+            if (!exists)
+            {
+                throw new CategoryDoesNotExistsException();
+            }
+            CategoryProductsDTO newCategoryProductsDTO = productDatabaseContext.GetCategoryProducts(CategoryName);
+            return newCategoryProductsDTO;
+        }
+
+        public VariantDTO GetVariant(Guid variantID)
+        {
+            VariantDTO variantDTO = productDatabaseContext.GetVariant(variantID);
+            return variantDTO;
         }
     }
 }

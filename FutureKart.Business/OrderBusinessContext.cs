@@ -31,6 +31,10 @@ namespace FutureKart.Business
             }
             else
             {
+                foreach(OrderDTO order in ordersDTO.Orders)
+                {
+                    order.Status = orderDatabaseContext.GetOrderStatus(order.StatusID);
+                }
                 return ordersDTO;
             }
         }
@@ -64,6 +68,12 @@ namespace FutureKart.Business
             {
                 throw new CartEmptyException();
             }
+        }
+
+        public OrderDTO GetOrder(Guid orderID)
+        {
+            OrderDTO order = orderDatabaseContext.GetOrder(orderID);
+            return order;
         }
     }
 }

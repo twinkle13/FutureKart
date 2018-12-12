@@ -16,5 +16,6 @@ namespace FutureKart.View_Models
         [Required]
         [DisplayName("Password")]
         public string Password { get; set; }
+
     }
 }

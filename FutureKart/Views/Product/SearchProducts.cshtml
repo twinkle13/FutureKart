@@ -1,0 +1,44 @@
+﻿@model FutureKart.View_Models.ProductsSearchedResultViewModel
+@{
+    ViewBag.Title = "SearchProducts";
+}
+
+<h2>Search Results</h2>
+<div>
+<div>
+    <h4>Your search " @ViewBag.SearchString "</h4>
+    <hr />
+    <dl class="dl-horizontal"></dl>
+</div>
+
+<div class="row row-pb-md">
+    @if (Model.Products.Count() > 0)
+    {
+        foreach (var product in Model.Products)
+        {
+            <div class="col-md-3 col-lg-3 mb-4 text-center">
+                <div class="product-entry border">
+                    <a href="@Url.Action("ProductDetail", "Product", new { ProductID = product.ID})">
+                        <img src="@product.Variants.First().VariantImages.First().ImageURL" class="img-fluid" alt="Free html5 bootstrap 4 template" style=" height:160px;width:140px;">
+                    </a>
+                    <div class="desc">
+                        <h2><a href="@Url.Action("ProductDetail", "Product", new { ProductID = product.ID})">@product.Name</a></h2>
+                        <span class="price">Rs. @product.Variants.First().ListingPrice</span>
+                    </div>
+                    @if (product.Variants.First().Discount != 0)
+                    {
+                        <p>Discount Available</p>
+                    }
+
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No products match the search criteria</p>
+    }
+</div>
+
+</div>
+

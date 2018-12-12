@@ -9,7 +9,6 @@ namespace FutureKart.View_Models
     {
         public double TotalAmount { get; set; }
         public double TotalDiscount { get; set; }
-        public bool IsLoggedIn { get; set; }
         public IEnumerable<CartProductsViewModel> CartItems { get; set; }
     }
 }

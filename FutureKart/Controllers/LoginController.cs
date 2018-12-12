@@ -46,6 +46,10 @@ namespace FutureKart.Controllers
                     ModelState.AddModelError("", "Invalid Login Credentials");
                     return View(loginViewModel);
                 }
+                catch(IncorrectPasswordException ex)
+                {
+                    return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                }
                 catch(Exception ex)
                 {
                     ModelState.AddModelError("", "Something Went wrong. Please Try again later");

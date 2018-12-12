@@ -6,6 +6,7 @@ namespace FutureKart.View_Models
     {
         public System.Guid ID { get; set; }
         public IEnumerable<VariantViewModel> Variants { get; set; }
+        public VariantViewModel variantDisplay { get; set; }
         public CategoryProductViewModel Category { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }

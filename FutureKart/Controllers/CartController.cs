@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FutureKart.Business;
+using FutureKart.Filter;
 using FutureKart.Shared.DTO.Cart;
 using FutureKart.Shared.DTO.Category;
 using FutureKart.Shared.DTO.Product;
@@ -14,6 +15,7 @@ using System.Web.Mvc;
 
 namespace FutureKart.Controllers
 {
+    [UserAuthFilter]
     public class CartController : Controller
     {
         CartBusinessContext CartBusinessContextObject;
@@ -50,60 +52,82 @@ namespace FutureKart.Controllers
 
         public ActionResult AddItem([Bind(Include = "VariantID, ProductID, Quantity,OrderLimit, Inventory")] CartViewModel cartViewModel)
         {
-            CartMessagesViewModel cartMessagesViewModel = new CartMessagesViewModel();
+            try
+            {
+                CartMessagesViewModel cartMessagesViewModel = new CartMessagesViewModel();
 
-            if (ModelState.IsValid)
-            {
-                CartDTO cartDTO = CartMapper.Map<CartViewModel, CartDTO>(cartViewModel);
-                cartDTO.UserID = new Guid(Session["UserID"].ToString());
-                try
+                if (ModelState.IsValid)
                 {
-                    CartBusinessContextObject.AddItemToCart(cartDTO);
-                    cartMessagesViewModel.SuccessMessage = "Item Successfuly added to cart";
-                    cartMessagesViewModel.IsLoggedIn = true;
-                    return View(cartMessagesViewModel);
-                }
-                catch (ItemAlreadyInCartException)
-                {
-                    cartMessagesViewModel.ErrorMessages.Add("Item is already present in the Cart");
-                    return View(cartMessagesViewModel);
-                }
-                catch (Exception ex)
-                {
-                    return View("Internal Error" + ex);
-                }
-            }
-            else
-            {
-                foreach(var modelStateValue in ModelState.Values)
-                {
-                    foreach(var modelStateError in modelStateValue.Errors)
+                    CartDTO cartDTO = CartMapper.Map<CartViewModel, CartDTO>(cartViewModel);
+                    cartDTO.UserID = new Guid(Session["UserID"].ToString());
+                    try
                     {
-                        cartMessagesViewModel.ErrorMessages.Add(modelStateError.ErrorMessage.ToString());
+                        CartBusinessContextObject.AddItemToCart(cartDTO);
+                        cartMessagesViewModel.SuccessMessage = "Item Successfuly added to cart";
+                        return View(cartMessagesViewModel);
+                    }
+                    catch (ItemAlreadyInCartException)
+                    {
+                        cartMessagesViewModel.ErrorMessages.Add("Item is already present in the Cart");
+                        return View(cartMessagesViewModel);
+                    }
+                    catch (QuantityUnavailableException)
+                    {
+                        cartMessagesViewModel.ErrorMessages.Add("quantity unavailable");
+                        return View(cartMessagesViewModel);
+                    }
+                    catch (OrderLimitExceedException)
+                    {
+                        cartMessagesViewModel.ErrorMessages.Add("order quantity exceed limit");
+                        return View(cartMessagesViewModel);
+                    }
+                    catch (Exception ex)
+                    {
+                        return View("Internal Error" + ex);
                     }
                 }
-                return View(cartMessagesViewModel);
+                else
+                {
+                    foreach (var modelStateValue in ModelState.Values)
+                    {
+                        foreach (var modelStateError in modelStateValue.Errors)
+                        {
+                            cartMessagesViewModel.ErrorMessages.Add(modelStateError.ErrorMessage.ToString());
+                        }
+                    }
+                    return View(cartMessagesViewModel);
+                }
+            }catch(Exception ex)
+            {
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
             }
         }
 
         public ActionResult ViewCart()
         {
-          CartItemsDTO CartInfoDTO = CartBusinessContextObject.GetCart(new Guid(Session["UserID"].ToString()));
-            CartItemsViewModel cartItemsViewModel = new CartItemsViewModel();
-            cartItemsViewModel = CartInfoMapper.Map<CartItemsDTO, CartItemsViewModel>(CartInfoDTO);
-            cartItemsViewModel.IsLoggedIn = true;
-            return View(cartItemsViewModel);
+            try
+            {
+                CartItemsDTO CartInfoDTO = CartBusinessContextObject.GetCart(new Guid(Session["UserID"].ToString()));
+                CartItemsViewModel cartItemsViewModel = new CartItemsViewModel();
+                cartItemsViewModel = CartInfoMapper.Map<CartItemsDTO, CartItemsViewModel>(CartInfoDTO);
+                return View(cartItemsViewModel);
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+            }
         }
 
         public ActionResult RemoveItem(Guid VariantID)
         {
-            CartBusinessContextObject.RemoveItemFromCart(new Guid(Session["UserID"].ToString()) , VariantID);
-            return RedirectToAction("ViewCart");
-        }
-        // GET: Cart
-        public ActionResult Index()
-        {
-            return View();
+            try
+            {
+                CartBusinessContextObject.RemoveItemFromCart(new Guid(Session["UserID"].ToString()), VariantID);
+                return RedirectToAction("ViewCart");
+            }catch(Exception ex)
+            {
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+            }
         }
     }
 }

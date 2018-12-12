@@ -37,7 +37,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top colorlib-loader">
+    <div class="navbar navbar-inverse navbar-fixed-top colorlib-loader" style="margin-bottom:250px">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -47,18 +47,49 @@
                 </button>
                 @Html.ActionLink("FutureKart", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
+
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("SignUp", "Register", "Registration")</li>
-                    <li>@Html.ActionLink("SignIn", "Login", "Login")</li>
-                    <li>@Html.ActionLink("View Cart", "ViewCart", "Cart")</li>
-                    <li>@Html.ActionLink("My Orders", "MyOrders", "Order")</li>
+                    @if (Session["UserID"] == null)
+                    {
+                        <li>@Html.ActionLink("SignUp", "Register", "Registration")</li>
+                        <li>@Html.ActionLink("SignIn", "Login", "Login")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("View Cart", "ViewCart", "Cart")</li>
+                        <li>@Html.ActionLink("My Orders", "MyOrders", "Order")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "User")</li>
+                    }
                 </ul>
+                <div class=" col-md-5 pull-right" style="margin-top:15px;">
+
+
+                    @using (Html.BeginForm("SearchProducts", "Product", FormMethod.Get, new { @class = "search-wrap" }))
+                    {
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="search" class="form-control search" placeholder="Search" name="SearchString">
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-primary submit-search text-center" type="submit">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
             </div>
+
         </div>
+        @Html.Action("GetCategories", "Category")
     </div>
-    <div class="container body-content">
+
+    <div class="container body-content" style="margin-top:80px">
 
         <hr />
         @RenderBody()

@@ -161,12 +161,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\StaticController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="CustomAttributes\ConfirmPasswordAttribute.cs" />
+    <Compile Include="CustomAttributes\OrderQuantityAttribute.cs" />
+    <Compile Include="Filter\UserAuthFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -176,6 +181,7 @@
     <Compile Include="View Models\CartMessagesViewModel.cs" />
     <Compile Include="View Models\CartProductsViewModel.cs" />
     <Compile Include="View Models\CartViewModel.cs" />
+    <Compile Include="View Models\CategoriesProductViewModel.cs" />
     <Compile Include="View Models\CategoryProductViewModel.cs" />
     <Compile Include="View Models\AnalyticsViewModel.cs" />
     <Compile Include="View Models\LoginViewModel.cs" />
@@ -183,6 +189,7 @@
     <Compile Include="View Models\OrderProductViewModel.cs" />
     <Compile Include="View Models\OrdersViewModel.cs" />
     <Compile Include="View Models\OrderViewModel.cs" />
+    <Compile Include="View Models\ProductsSearchedResultViewModel.cs" />
     <Compile Include="View Models\ProductViewModel.cs" />
     <Compile Include="View Models\RegistrationViewModel.cs" />
     <Compile Include="View Models\SelectAddressViewModel.cs" />
@@ -225,8 +232,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Registration\Register.cshtml" />
     <Content Include="Views\Registration\Success.cshtml" />
@@ -236,11 +241,24 @@
     <Content Include="Views\Cart\ViewCart.cshtml" />
     <Content Include="Views\Address\SelectAddress.cshtml" />
     <Content Include="Views\Address\AddAddress.cshtml" />
+    <Content Include="Views\Order\MyOrders.cshtml" />
+    <Content Include="Views\Product\SearchProducts.cshtml" />
+    <Content Include="Views\Category\GetCategories.cshtml" />
+    <Content Include="Views\Category\GetCategoryProducts.cshtml" />
+    <Content Include="Views\Order\GetOrder.cshtml" />
+    <Content Include="Views\Static\CatchException.cshtml" />
+    <Content Include="Views\Static\PageNotFound.cshtml" />
+    <Content Include="Views\Static\ExceptionCatch.cshtml" />
+    <Content Include="Views\Product\ShowVariant.cshtml" />
+    <Content Include="Views\Shared\InternalError.cshtml" />
+    <Content Include="Views\Order\Success.cshtml" />
+    <Content Include="Views\Order\NoOrders.cshtml" />
+    <Content Include="Views\User\Admin.cshtml" />
+    <Content Include="Views\User\NotAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

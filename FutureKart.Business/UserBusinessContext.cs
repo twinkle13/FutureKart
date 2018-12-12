@@ -78,5 +78,10 @@ namespace FutureKart.Business
                 }
             
         }
+
+        public bool CheckAdmin(Guid UserID)
+        {
+            return UserDBContext.CheckAdmin(UserID);
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace FutureKart.Shared.DTO.Category
     {
         public string Name { get; set; }
         public int ProductsSold { get; set; }
+        public Guid ID { get; set; }
     }
 }

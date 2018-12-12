@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="AddressBusinessContext.cs" />
     <Compile Include="CartBusinessContext.cs" />
+    <Compile Include="CategoryBusinessContext.cs" />
     <Compile Include="OrderBusinessContext.cs" />
     <Compile Include="PasswordHasher.cs" />
     <Compile Include="ProductBusinessContext.cs" />

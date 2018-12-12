@@ -9,7 +9,6 @@ namespace FutureKart.View_Models
     {
         public string SuccessMessage { get; set; }
         public List<string> ErrorMessages { get; set; }
-        public bool IsLoggedIn { get; set; }
         public CartMessagesViewModel()
         {
             ErrorMessages = new List<string>();

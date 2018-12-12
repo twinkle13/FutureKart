@@ -9,6 +9,7 @@ namespace FutureKart.View_Models
     public class VariantViewModel
     {
         public Guid ID { get; set; }
+        public string VariantString { get; set; }
         public double ListingPrice { get; set; }
         public double Discount { get; set; }
         public double SellingPrice { get; set; }

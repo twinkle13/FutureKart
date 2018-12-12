@@ -1,88 +1,73 @@
 ﻿@model FutureKart.View_Models.CartItemsViewModel
-    @{ 
-        ViewBag.Title = "view Cart";
-    }
-<div class="colorlib-product">
-    <div class="container">
-     
-        <div class="row row-pb-lg">
-            <div class="col-md-12">
-                <div class="product-name d-flex">
-                    <div class="one-forth text-left px-4">
-                        <span>Product Details</span>
-                    </div>
-                    <div class="one-eight text-center">
-                        <span>Price</span>
-                    </div>
-                    <div class="one-eight text-center">
-                        <span>Quantity</span>
-                    </div>
-                    <div class="one-eight text-center">
-                        <span>Total</span>
-                    </div>
-                    <div class="one-eight text-center px-4">
-                        <span>Remove</span>
-                    </div>
-                </div>
-                @foreach (var cartItem in Model.CartItems)
-                {
-                    <div class="product-cart d-flex">
-                        <div class="one-forth">
-                            <div class="product-img" style="background-image: url(@cartItem.Variant.VariantImages.First());">
-                            </div>
-                            <div class="display-tc">
-                                <h3>@cartItem.Variant.Product.Name</h3>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <span class="price">$@cartItem.Variant.DiscountedPrice</span>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <span>@cartItem.Quantity</span>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
+@{
+    ViewBag.Title = "view Cart";
+}
+<div class="container">
 
-                            <div class="display-tc">
-                                <span class="price">$@(@cartItem.Variant.DiscountedPrice * @cartItem.Quantity)</span>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <a href="@Url.Action("RemoveItem", "Cart", new { VariantID = cartItem.Variant.ID })" class="closed "></a>
-                            </div>
-                        </div>
-                    </div>
-                }
-
-            </div>
+    <h2>Your Cart</h2>
+    <div class="row">
+        <div class="col-md-8">
         </div>
-        <div class="row row-pb-lg">
-            <div class="col-md-12">
-                <div class="total-wrap">
+        <div class="col-md-1">
+            Quantity
+        </div>
+        <div class="col-md-1">
+            SellingPrice
+        </div>
+    </div>
+
+    @foreach (var cartItem in Model.CartItems)
+    {
+        <div class="row" style="padding:1px 1px 1px 1px;border: 1px solid #e2e6e2;margin-bottom:2px;">
+            <div class="col-md-2">
+                <img src="@cartItem.Variant.VariantImages.First().ImageURL" class="img-fluid" alt="Image Not available" style=" height:60px;width:60px;">
+            </div>
+            <div class="col-md-6">
+                <p style=" font-size: 30px;">@cartItem.Variant.Product.Title.ToUpper()</p>
+                <p style=" font-style: italic; font-size: 14px;">@cartItem.Variant.Product.Description</p>
+            </div>
+            <div class="col-md-1" style="margin:12px 0px 12px 0px;">
+                @cartItem.Quantity
+            </div>
+            <div class="col-md-1" style="margin:12px 0px 12px 0px;">
+                @cartItem.Variant.DiscountedPrice
+            </div>
+            <div class="col-md-2" style="margin:12px 0px 12px 0px;">
+                <a href="@Url.Action("RemoveItem", "Cart", new {VariantID = cartItem.Variant.ID })">
+                    <p class="btn btn-danger">Delete</p>
+                </a>
+            </div>
+
+        </div>
+    }
+
+    <div class="row row-pb-lg">
+        <div class="col-md-12">
+            <div class="total-wrap">
+                @if (Model.CartItems.Count() != 0)
+                {
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-md-8">
                             <form action="#">
-                                <div class="row form-group">
-                                    @if (Model.CartItems.Count() != 0)
-                                    {
-                                        <div class="col-sm-3">
-                                            <a href="@Url.Action("SelectAddress", "Address")" class="btn btn-primary">Checkout On Existing Address</a>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <a href="@Url.Action("AddAddress", "Address")" class="btn btn-primary">Checkout On New Address</a>
-                                        </div>
-                                    }
+                                <div>
+                                    <br/>
+                                    <br/>
+                                    <div >
+                                        <a href="@Url.Action("SelectAddress", "Address")" class="btn btn-primary">Checkout On Existing Address</a>
+                                    </div>
+                                    <br />
+                                    <div >
+                                        <a href="@Url.Action("AddAddress", "Address")" class="btn btn-primary">Checkout On New Address</a>
+                                    </div>
+
+
                                 </div>
                             </form>
                         </div>
                         <div class="col-sm-4 text-center">
                             <div class="total">
                                 <div class="sub">
-                                    <p><span>Subtotal:</span> <span>$@((@Model.TotalDiscount+@Model.TotalAmount))</span></p>
+                                    <p><span>Subtotal:</span> <span>$@((@Model.TotalDiscount + @Model.TotalAmount))</span></p>
                                     <p><span>Discount:</span> <span>$@Model.TotalDiscount </span></p>
                                 </div>
                                 <div class="grand-total">
@@ -91,8 +76,21 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="col-md-6">
+                                <p>Cart Empty :( </p>
+                                <p>Please Try Our Products. <a href="@Url.Action("Index", "Home")">Go to homepage</a></p>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
+
 </div>
+

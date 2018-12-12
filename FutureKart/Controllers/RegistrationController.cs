@@ -37,9 +37,23 @@ namespace FutureKart.Controllers
 
         public ActionResult Register()
         {
-            RegistrationViewModel registrationViewModel ;
-            registrationViewModel = RegisterationRoleMapper.Map<RolesDTO, RegistrationViewModel>(roleList);
-            return View(registrationViewModel);
+            try
+            {
+                RegistrationViewModel registrationViewModel;
+                registrationViewModel = RegisterationRoleMapper.Map<RolesDTO, RegistrationViewModel>(roleList);
+                return View(registrationViewModel);
+            }catch(EmailAlreadyExistsException ex)
+            {
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+            }
+            catch(NoRolesFoundException ex)
+            {
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+            }
         }
         [HttpPost]
         public ActionResult Register([Bind(Include = "Name,Password,ConfirmedPassword,Email,PhoneNumber,RoleName,Roles")] RegistrationViewModel registrationViewModel)
