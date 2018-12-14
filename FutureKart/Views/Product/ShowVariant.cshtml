@@ -4,7 +4,7 @@
     ViewBag.Title = "ShowVariant";
 }
 
-<h2>ProductDetail</h2>
+<h2>Product Detail</h2>
 <div class="colorlib-product">
     <div class="container">
         <div class="row row-pb-lg product-detail-wrap">
@@ -59,10 +59,10 @@
                                 }
                             </select>
                         </div>
-
+                        //@Html.ValidationMessageFor(Model => Model.variantDisplay., "", new { @class = "text-danger" })
                         <div class="row">
-                            <div class="col-sm-12 text-center">
-                                <p class="addtocart"><button class="btn btn-primary btn-addtocart" type="submit"><i class="icon-shopping-cart"></i> Add to Cart</button></p>
+                            <div class="col-sm-12 text-right " style="margin-top:5px">
+                                <p class="addtocart"><button class="btn btn-primary btn-addtocart btn-success" type="submit"><i class="icon-shopping-cart"></i> Add to Cart</button></p>
                             </div>
                         </div>
                     }

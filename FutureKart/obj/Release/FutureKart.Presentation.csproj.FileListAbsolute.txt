@@ -113,3 +113,5 @@ D:\training\mvc\FutureKart\FutureKart\obj\Release\FutureKart.Presentation.csproj
 D:\training\mvc\FutureKart\FutureKart\obj\Release\FutureKart.Presentation.csproj.CopyComplete
 D:\training\mvc\FutureKart\FutureKart\obj\Release\FutureKart.dll
 D:\training\mvc\FutureKart\FutureKart\obj\Release\FutureKart.pdb
+D:\training\mvc\FutureKart\FutureKart\bin\FutureKart.mdf
+D:\training\mvc\FutureKart\FutureKart\bin\FutureKart_log.ldf

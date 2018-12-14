@@ -5,7 +5,7 @@
 <div class="row">
     @if(Model.SuccessMessage != null)
     {
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6 col-md-offset-3 alert alert-success">
             <p>@Model.SuccessMessage</p>
         </div>
     }
@@ -13,14 +13,18 @@
     {
         <div class="col-md-6 col-md-offset-3">
             <ul>
-                @foreach(var errorMessage in Model.ErrorMessages)
+                @foreach (var errorMessage in Model.ErrorMessages)
                 {
-                    <li><p>@errorMessage</p></li>
+                <li class="list-unstyled">
+                    <div class="alert alert-danger">
+                        <strong>Alert!</strong> @errorMessage
+                    </div>
+                </li>
                 }
             </ul>
         </div>
     }
 </div>
 <p>
-    @Html.ActionLink("Back to Previous page",null,null,null,new { href = Request.UrlReferrer,@class = "btn btn-default"})
+    @Html.ActionLink("Back to Previous page",null,null,null,new { href = Request.UrlReferrer,@class = "btn btn-default btn-danger" })
 </p>

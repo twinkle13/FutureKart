@@ -5,9 +5,27 @@
 
                 @foreach (string category in Model.categories)
                 {
-                    <li>@Html.ActionLink(category,"GetCategoryProducts","Category", new { CategoryName = category },null)</li>
+                    <li>@Html.ActionLink(category, "GetCategoryProducts", "Category", new { CategoryName = category }, null)</li>
                 }
             </ul>
+            <div class=" col-md-4 pull-right">
+
+
+                @using (Html.BeginForm("SearchProducts", "Product", FormMethod.Get, new { @class = "search-wrap" }))
+                {
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="search" class="form-control search" placeholder="Search Product ..." name="SearchString">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary submit-search text-center" type="submit">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
         </div>
 
     </div>

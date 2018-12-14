@@ -3,7 +3,7 @@
     ViewBag.Title = "MyOrders";
 }
 
-<h2>My Orders</h2>
+<h2 class="text-center">Order History</h2>
 <br />
 
 <div class="row">
@@ -11,12 +11,21 @@
     {
         foreach (var order in Model.Orders)
         {
-            <div class="col-md-7">
-                <a href="@Url.Action("GetOrder", "Order", new { OrderID = order.ID })"><h4>@order.OrderDate.ToString("dd/MM/yyyy")</h4></a>
-                <p><b>Total : </b>$@order.TotalAmount</p>
-                <p><b>Status : </b>@order.Status</p>
-                <hr />
-            </div>
+
+
+    <div class="col-md-7" style="margin-top:10px;border-bottom:ridge">
+        <div class="col-md-5">
+            <img src="@order.OrderPlaceds.First().OrderPlacedVariants.First().Variant.VariantImages.First().ImageURL" class="img-fluid" alt="Image Not available" style=" height:100px;width:100px;">
+        </div>
+        <div class="col-md-7">
+            <h4>Order ID :<a href="@Url.Action("GetOrder", "Order", new { OrderID = order.ID })">@order.ID.GetHashCode()</a></h4>
+            <h4>Order date :<a href="@Url.Action("GetOrder", "Order", new { OrderID = order.ID })">@order.OrderDate.ToString("dd/MM/yyyy")</a></h4>
+            <p><b>Total : </b>$@order.TotalAmount</p>
+            <p><b>Status : </b>@order.Status</p>
+        </div>
+        <hr />
+    </div>
+            
         }
     }
     else

@@ -3,22 +3,28 @@
     ViewBag.Title = "view Cart";
 }
 <div class="container">
-
+    @if (Model.CartItems.Count() != 0)
+    {
     <h2>Your Cart</h2>
     <div class="row">
         <div class="col-md-8">
         </div>
         <div class="col-md-1">
-            Quantity
+            <strong>
+                Quantity
+            </strong>
         </div>
         <div class="col-md-1">
-            SellingPrice
+            <strong>
+                SellingPrice
+            </strong>
         </div>
     </div>
+    }
 
     @foreach (var cartItem in Model.CartItems)
     {
-        <div class="row" style="padding:1px 1px 1px 1px;border: 1px solid #e2e6e2;margin-bottom:2px;">
+        <div class="row" style="padding:1px 1px 1px 1px;border: 1px solid #e2e6e2;margin-bottom:5px;">
             <div class="col-md-2">
                 <img src="@cartItem.Variant.VariantImages.First().ImageURL" class="img-fluid" alt="Image Not available" style=" height:60px;width:60px;">
             </div>
@@ -53,11 +59,11 @@
                                     <br/>
                                     <br/>
                                     <div >
-                                        <a href="@Url.Action("SelectAddress", "Address")" class="btn btn-primary">Checkout On Existing Address</a>
+                                        <a href="@Url.Action("SelectAddress", "Address")" class="btn btn-primary btn-success">Checkout On Existing Address</a>
                                     </div>
                                     <br />
                                     <div >
-                                        <a href="@Url.Action("AddAddress", "Address")" class="btn btn-primary">Checkout On New Address</a>
+                                        <a href="@Url.Action("AddAddress", "Address")" class="btn btn-primary btn-success">Checkout On New Address</a>
                                     </div>
 
 
@@ -81,7 +87,7 @@
                 {
                     <div class="row">
                         <div class="col-sm-8">
-                            <div class="col-md-6">
+                            <div class="col-md-12 alert-danger" style="padding:10px;border-radius:5px;">
                                 <p>Cart Empty :( </p>
                                 <p>Please Try Our Products. <a href="@Url.Action("Index", "Home")">Go to homepage</a></p>
                             </div>

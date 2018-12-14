@@ -27,3 +27,5 @@ D:\training\mvc\FutureKart\FutureKart.Business\obj\Release\FutureKart.Business.c
 D:\training\mvc\FutureKart\FutureKart.Business\obj\Release\FutureKart.Business.csproj.CopyComplete
 D:\training\mvc\FutureKart\FutureKart.Business\obj\Release\FutureKart.Business.dll
 D:\training\mvc\FutureKart\FutureKart.Business\obj\Release\FutureKart.Business.pdb
+D:\training\mvc\FutureKart\FutureKart.Business\bin\Release\FutureKart.mdf
+D:\training\mvc\FutureKart\FutureKart.Business\bin\Release\FutureKart_log.ldf

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="67f695113cac40468138d56153261561" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="1b57c005af04402eb65fb60ac206b3b5" Name="Diagram1">
         <EntityTypeShape EntityType="FutureKartModel.Address" Width="1.5" PointX="3.75" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FutureKartModel.CartVariantMapping" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="FutureKartModel.Category" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />

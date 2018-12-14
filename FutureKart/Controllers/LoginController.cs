@@ -48,7 +48,8 @@ namespace FutureKart.Controllers
                 }
                 catch(IncorrectPasswordException ex)
                 {
-                    return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                    ModelState.AddModelError("", "Incorrect password");
+                    return View(loginViewModel);
                 }
                 catch(Exception ex)
                 {

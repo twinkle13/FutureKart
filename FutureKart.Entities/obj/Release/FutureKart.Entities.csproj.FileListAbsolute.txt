@@ -15,3 +15,5 @@ D:\training\mvc\FutureKart\FutureKart.Entities\obj\Release\FutureKart.Entities.c
 D:\training\mvc\FutureKart\FutureKart.Entities\obj\Release\FutureKart.Entities.csproj.CopyComplete
 D:\training\mvc\FutureKart\FutureKart.Entities\obj\Release\FutureKart.Entities.dll
 D:\training\mvc\FutureKart\FutureKart.Entities\obj\Release\FutureKart.Entities.pdb
+D:\training\mvc\FutureKart\FutureKart.Entities\bin\Release\FutureKart.mdf
+D:\training\mvc\FutureKart\FutureKart.Entities\bin\Release\FutureKart_log.ldf
