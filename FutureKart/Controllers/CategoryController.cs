@@ -29,6 +29,10 @@ namespace FutureKart.Controllers
                 });
             CategoryMapper = new Mapper(config);
         }
+        /// <summary>
+        /// get all categories from the database
+        /// </summary>
+        /// <returns></returns>
         public PartialViewResult GetCategories()
         {
           CategoriesProductViewModel categoriesViewModel = new CategoriesProductViewModel();
@@ -36,6 +40,11 @@ namespace FutureKart.Controllers
             categoriesViewModel.categories = categoryDTOs.categories;
             return PartialView(categoriesViewModel);
         }
+        /// <summary>
+        /// get products of the given category
+        /// </summary>
+        /// <param name="CategoryName"></param>
+        /// <returns></returns>
         public ActionResult GetCategoryProducts(string CategoryName)
         {
             try
@@ -47,7 +56,7 @@ namespace FutureKart.Controllers
             }
             catch(CategoryDoesNotExistsException ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
             
 

@@ -1,3 +1,5 @@
+D:\training\mvc\FutureKart\FutureKart.DataAccess\bin\Release\FutureKart.mdf
+D:\training\mvc\FutureKart\FutureKart.DataAccess\bin\Release\FutureKart_log.ldf
 D:\training\mvc\FutureKart\FutureKart.DataAccess\bin\Release\FutureKart.DataAccess.dll.config
 D:\training\mvc\FutureKart\FutureKart.DataAccess\bin\Release\FutureKart.DataAccess.dll
 D:\training\mvc\FutureKart\FutureKart.DataAccess\bin\Release\FutureKart.DataAccess.pdb
@@ -21,5 +23,3 @@ D:\training\mvc\FutureKart\FutureKart.DataAccess\obj\Release\FutureKart.DataAcce
 D:\training\mvc\FutureKart\FutureKart.DataAccess\obj\Release\FutureKart.DataAccess.csproj.CopyComplete
 D:\training\mvc\FutureKart\FutureKart.DataAccess\obj\Release\FutureKart.DataAccess.dll
 D:\training\mvc\FutureKart\FutureKart.DataAccess\obj\Release\FutureKart.DataAccess.pdb
-D:\training\mvc\FutureKart\FutureKart.DataAccess\bin\Release\FutureKart.mdf
-D:\training\mvc\FutureKart\FutureKart.DataAccess\bin\Release\FutureKart_log.ldf

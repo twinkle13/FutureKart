@@ -12,7 +12,14 @@
                     <a href="#" class="prod-img">
                         <img src="@Model.variantDisplay.VariantImages.First().ImageURL" class="img-fluid" alt="Free html5 bootstrap 4 template" style="max-height: 300px; max-width: 300px">
                     </a>
+
                 </div>
+                @foreach (var variant in Model.Variants.ToList())
+                {
+                    <a href="@Url.Action("UpdateVariant", "Product", new { variantID = variant.ID})" class="prod-img">
+                        <img src="@variant.VariantImages.First().ImageURL" class="img-fluid" alt="Free html5 bootstrap 4 template" style="max-width:50px;height:50px;margin-left:2rem;" />
+                    </a>
+                }
             </div>
             <div class="col-sm-4">
                 <div class="product-desc">
@@ -21,11 +28,11 @@
                     <p class="price">
                         @if (Model.Variants.First().Discount != 0)
                         {
-                            <strike>$@Model.variantDisplay.ListingPrice</strike><span style="display:inline">  $@((Model.variantDisplay.ListingPrice * (100 - Model.variantDisplay.Discount) / 100))</span>
+                            <strike>Rs. @Model.variantDisplay.ListingPrice</strike><span style="display:inline">  Rs. @((Model.variantDisplay.ListingPrice * (100 - Model.variantDisplay.Discount) / 100))</span>
                         }
                         else
                         {
-                            <span>$@Model.variantDisplay.ListingPrice</span>
+                            <span>Rs. @Model.variantDisplay.ListingPrice</span>
                         }
                     </p>
                     <p>@Model.Description</p>
@@ -34,11 +41,14 @@
                         @if (Model.Variants.First().Inventory <= 7)
                         {<span>Only</span>} @(Model.variantDisplay.Inventory - Model.variantDisplay.QuantitySold) left in stock.
                     </h5>
+                    <h3>
+                        @Model.variantDisplay.VariantString
+                    </h3>
 
                     @using (Html.BeginForm("AddItem", "Cart", new { ProductID = Model.ID, Inventory = Model.variantDisplay.Inventory, OrderLimit = Model.OrderLimit }, FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
-                        <div class="input-group mb-4 row">
-                            <div class="col-md-6">
+                        <div class="input-group mb-4 row  col-md-4">
+                            
                                 <span class="input-group-btn">
                                     <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
                                         -
@@ -52,20 +62,19 @@
                                         +
                                     </button>
                                 </span>
-                            </div>
-                            <div class="col-md-4 col-md-offset-2">
-                                <select name="VariantID" id="variant" class="form-control col-md-offset-2" onchange="ChangeData(this)">
+                            
+                                @*<select name="VariantID" id="variant" class="form-control col-md-offset-2" onchange="ChangeData(this)" hidden>
                                     @foreach (var Variant in Model.Variants)
                                     {
                                         <option value=@Variant.ID>@Variant.VariantString</option>
                                     }
-                                </select>
-                            </div>
+                                </select>*@
+                            
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-12 text-center">
-                                <p class="addtocart"><button class="btn btn-primary btn-addtocart" type="submit"><i class="icon-shopping-cart"></i> Add to Cart</button></p>
+                            <div class="col-sm-12 text-center" style="margin-top:5px">
+                                <p class="addtocart"><button class="btn btn-primary btn-addtocart btn-success" type="submit"><i class="icon-shopping-cart"></i> Add to Cart</button></p>
                             </div>
                         </div>
                     }

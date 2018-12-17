@@ -28,7 +28,11 @@ namespace FutureKart.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// log in the user with valid credentials.
+        /// </summary>
+        /// <param name="loginViewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Login([Bind(Include = "Email, Password")] LoginViewModel loginViewModel)
         {

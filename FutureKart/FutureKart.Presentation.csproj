@@ -184,6 +184,7 @@
     <Compile Include="View Models\CategoriesProductViewModel.cs" />
     <Compile Include="View Models\CategoryProductViewModel.cs" />
     <Compile Include="View Models\AnalyticsViewModel.cs" />
+    <Compile Include="View Models\ExceptionViewModel.cs" />
     <Compile Include="View Models\LoginViewModel.cs" />
     <Compile Include="View Models\OrderPlacedVariantViewModel.cs" />
     <Compile Include="View Models\OrderProductViewModel.cs" />
@@ -259,6 +260,7 @@
     <Content Include="Views\Order\NoOrders.cshtml" />
     <Content Include="Views\User\Admin.cshtml" />
     <Content Include="Views\User\NotAdmin.cshtml" />
+    <Content Include="Views\Product\UpdateVariant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

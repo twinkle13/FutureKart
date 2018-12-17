@@ -49,7 +49,11 @@ namespace FutureKart.Controllers
             CartMapper = new Mapper(cartMappingconfig);
             CartInfoMapper = new Mapper(cartInfoMappingConfig);
         }
-
+        /// <summary>
+        /// adds item to the cart
+        /// </summary>
+        /// <param name="cartViewModel"></param>
+        /// <returns></returns>
         public ActionResult AddItem([Bind(Include = "VariantID, ProductID, Quantity,OrderLimit, Inventory")] CartViewModel cartViewModel)
         {
             try
@@ -83,11 +87,12 @@ namespace FutureKart.Controllers
                     }
                     catch (Exception ex)
                     {
-                        return View("Internal Error" + ex);
+                        return View("Internal Error" + ex.Message);
                     }
                 }
                 else
                 {
+                    // display errors if occuered 
                     foreach (var modelStateValue in ModelState.Values)
                     {
                         foreach (var modelStateError in modelStateValue.Errors)
@@ -99,10 +104,13 @@ namespace FutureKart.Controllers
                 }
             }catch(Exception ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
         }
-
+        /// <summary>
+        /// displays cart
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ViewCart()
         {
             try
@@ -114,7 +122,7 @@ namespace FutureKart.Controllers
             }
             catch(Exception ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
         }
 
@@ -126,7 +134,7 @@ namespace FutureKart.Controllers
                 return RedirectToAction("ViewCart");
             }catch(Exception ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
         }
     }

@@ -10,7 +10,6 @@ D:\training\mvc\FutureKart\FutureKart.Shared\bin\Release\AutoMapper.xml
 D:\training\mvc\FutureKart\FutureKart.Shared\bin\Release\EntityFramework.xml
 D:\training\mvc\FutureKart\FutureKart.Shared\bin\Release\EntityFramework.SqlServer.xml
 D:\training\mvc\FutureKart\FutureKart.Shared\bin\Release\System.ValueTuple.xml
-D:\training\mvc\FutureKart\FutureKart.Shared\obj\Release\FutureKart.Shared.csprojAssemblyReference.cache
 D:\training\mvc\FutureKart\FutureKart.Shared\obj\Release\FutureKart.Shared.csproj.CoreCompileInputs.cache
 D:\training\mvc\FutureKart\FutureKart.Shared\obj\Release\FutureKart.Shared.csproj.CopyComplete
 D:\training\mvc\FutureKart\FutureKart.Shared\obj\Release\FutureKart.Shared.dll

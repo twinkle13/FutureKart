@@ -34,7 +34,10 @@ namespace FutureKart.Controllers
             roleList = userBusinessContext.GetRoles();
 
         }
-
+        /// <summary>
+        /// displays the form for registeration
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Register()
         {
             try
@@ -44,17 +47,22 @@ namespace FutureKart.Controllers
                 return View(registrationViewModel);
             }catch(EmailAlreadyExistsException ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
             catch(NoRolesFoundException ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
             catch(Exception ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
         }
+        /// <summary>
+        /// registers the user with information filled in registeration formed
+        /// </summary>
+        /// <param name="registrationViewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Register([Bind(Include = "Name,Password,ConfirmedPassword,Email,PhoneNumber,RoleName,Roles")] RegistrationViewModel registrationViewModel)
         {
@@ -80,11 +88,10 @@ namespace FutureKart.Controllers
                 ModelState.AddModelError("Email", "Email id already Registered");
                 return View(registrationViewModel);
             }
-            catch(Exception exception)
+            catch(Exception ex)
             {
-                ModelState.AddModelError("", "Something went wrong.Please try after some time");
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
-            return View("Error");
         }
 
 

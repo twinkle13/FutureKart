@@ -30,6 +30,11 @@ namespace FutureKart.Controllers
             });
             AnalyticsMapper = new Mapper(AnalyticsConfig);
         }
+        /// <summary>
+        /// sorts the data as per the requirement.
+        /// top 3 categories with top 3 selling products at begining
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             try
@@ -45,13 +50,13 @@ namespace FutureKart.Controllers
                     analyticsViewModel = AnalyticsMapper.Map<AnalyticsDTO, AnalyticsViewModel>(analyticsDTO);
                     return View(analyticsViewModel);
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    return View("Internal Error");
+                    return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
                 }
             }catch(Exception ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
             
         }

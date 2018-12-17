@@ -12,6 +12,9 @@ using System.Web.Mvc;
 
 namespace FutureKart.Controllers
 {
+    /// <summary>
+    /// ONLY FOR LOGGED IN USERS
+    /// </summary>
     [UserAuthFilter]
     public class AddressController : Controller
     {
@@ -33,7 +36,10 @@ namespace FutureKart.Controllers
             AddressMapper = new Mapper(config);
             AddressViewMapper = new Mapper(configView);
         }
-        
+        /// <summary>
+        /// list of previous addresses of the user. If empty redirect to new address form page
+        /// </summary>
+        /// <returns>ActionResult-->  list of addresses</returns>
         public ActionResult SelectAddress()
         {
             try
@@ -54,10 +60,15 @@ namespace FutureKart.Controllers
             }
             catch(Exception ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
             
         }
+        /// <summary>
+        /// selects address from addresses
+        /// </summary>
+        /// <param name="selectAddressViewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult SelectAddress([Bind(Include = ("AddressID"))] SelectAddressViewModel selectAddressViewModel)
         {
@@ -68,7 +79,7 @@ namespace FutureKart.Controllers
                 return RedirectToAction("CheckOut", "Order", new { AddressID = AddressID });
             }catch(Exception ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
 
         }
@@ -78,6 +89,11 @@ namespace FutureKart.Controllers
             return View();
 
         }
+        /// <summary>
+        /// form for new address input
+        /// </summary>
+        /// <param name="addressViewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult AddAddress([Bind(Include = ("AddressLine1, AddressLine2, PIN, City,State, Country"))] AddressViewModel addressViewModel)
         {
@@ -94,7 +110,7 @@ namespace FutureKart.Controllers
                     }
                     catch (AddAddressException addressException)
                     {
-                        return RedirectToAction("ExceptionCatch", "Static", new { exception = addressException });
+                        return RedirectToAction("ExceptionCatch", "Static", new { exception = addressException.Message });
                     }
 
                 }
@@ -105,7 +121,7 @@ namespace FutureKart.Controllers
             }
             catch(Exception ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
         }
 

@@ -78,6 +78,7 @@ namespace FutureKart.DataAccess
 
         public RolesDTO GetRoles()
         {
+            //List<Role> roleList = FutureKartContext.Roles.ToList();
             List<Role> roleList = FutureKartContext.Roles.Where(r => r.Name != "ADMIN").ToList();
             Debug.WriteLine(FutureKartContext.Roles.Where(r => r.Name != "ADMIN").ToList());
             if(roleList.Count()<=0)

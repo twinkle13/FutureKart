@@ -39,9 +39,9 @@ namespace FutureKart
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
             routes.MapRoute(
-                name: "CatchAll",
-                url: "{*any}",
-                defaults: new { controller = "Login", action = "PageNotFound" });
+                        "PageNotFound",
+                        "{*url}",
+                         new { controller = "Static", action = "PageNotFound" } );
         }
     }
 }

@@ -35,6 +35,11 @@ namespace FutureKart.Controllers
             });
             OrdersMapper = new Mapper(config);
         }
+        /// <summary>
+        /// places the order for current user and on given address
+        /// </summary>
+        /// <param name="AddressID"></param>
+        /// <returns></returns>
         public ActionResult CheckOut(Guid AddressID)
         {
             Guid UserID = new Guid(Session["UserID"].ToString());
@@ -45,18 +50,22 @@ namespace FutureKart.Controllers
             }
             catch (NoOrderException ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
             catch(CartEmptyException ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
             catch (Exception ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
             
         }
+        /// <summary>
+        /// gives all the addresses
+        /// </summary>
+        /// <returns></returns>
         public ActionResult MyOrders()
         {
 
@@ -76,6 +85,11 @@ namespace FutureKart.Controllers
             }
             return View(ordersViewModel);
         }
+        /// <summary>
+        /// get info of particular order
+        /// </summary>
+        /// <param name="OrderID"></param>
+        /// <returns></returns>
         public ActionResult GetOrder(Guid OrderID)
         {
             try
@@ -85,7 +99,7 @@ namespace FutureKart.Controllers
                 return View(orderViewModel);
             }catch(Exception ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
         }
 

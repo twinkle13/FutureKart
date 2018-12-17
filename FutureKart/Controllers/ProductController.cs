@@ -54,6 +54,11 @@ namespace FutureKart.Controllers
 
 
         }
+        /// <summary>
+        /// searches products with the search query
+        /// </summary>
+        /// <param name="SearchString">search query string</param>
+        /// <returns> ActionResult --> array of products having search string in title or description</returns>
         public ActionResult SearchProducts(string SearchString)
         {
             if (Session["UserID"] != null)
@@ -77,9 +82,14 @@ namespace FutureKart.Controllers
             }
             catch (Exception ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
         }
+        /// <summary>
+        /// Product specific details. (ONLY FOR LOGGED IN USERS)
+        /// </summary>
+        /// <param name="ProductID"> id of the product </param>
+        /// <returns>ActionResult</returns>
         [UserAuthFilter]
         public ActionResult ProductDetail(Guid ProductID)
         {
@@ -90,20 +100,25 @@ namespace FutureKart.Controllers
                 productDTO = productBusinessContext.GetProduct(ProductID);
                 productViewModel = ProductViewModelMapper.Map<ProductDTO, ProductViewModel>(productDTO);
                 productViewModel.variantDisplay = ProductViewModelMapper.Map<VariantDTO, VariantViewModel>(productDTO.Variants.FirstOrDefault());
-                return RedirectToAction("ShowVariant", new { variantID = productViewModel.variantDisplay.ID });
+                return View(productViewModel);
+                //return RedirectToAction("ShowVariant", new { variantID = productViewModel.variantDisplay.ID });
                 //productViewModel.IsLoggedIn = true;
                 //return View(productViewModel);
             }
-            catch(ProductDoesNotExistsException)
+            catch(ProductDoesNotExistsException ex)
             {
-                return View("Error");
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
             catch (Exception ex)
             {
-                return View("Internal Error" + ex);
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
         }
-        
+        /// <summary>
+        /// show variant specific details
+        /// </summary>
+        /// <param name="variantID"> variant's Id </param>
+        /// <returns> ActionResult</returns>
         public ActionResult ShowVariant(Guid variantID)
         {
             try
@@ -117,22 +132,32 @@ namespace FutureKart.Controllers
                 return View(productViewModel);
             }catch(Exception ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
         }
-        [HttpPost]
+        /// <summary>
+        /// update variant information on variant change.
+        /// </summary>
+        /// <param name="variantID"></param>
+        /// <returns>ActionResult--> returns updated variant info</returns>
+        
         public ActionResult UpdateVariant(string variantID)
         {
             try
             {
                 ModelState.Clear();
                 Guid VariantID = new Guid(variantID);
-                VariantDTO variantDTO = productBusinessContext.GetVariant(VariantID);
+                VariantDTO variantDTO = productBusinessContext.GetVariant(VariantID);                
                 ProductDTO productDTO = productBusinessContext.GetProduct(variantDTO.Product.ID);
-                return RedirectToAction("ShowVariant", new { variantID = variantDTO.ID });
-            }catch(Exception ex)
+                VariantViewModel variantViewModel = ProductViewModelMapper.Map<VariantDTO, VariantViewModel>(variantDTO);
+                ProductViewModel productViewModel = ProductViewModelMapper.Map<ProductDTO, ProductViewModel>(productDTO);
+                productViewModel.variantDisplay = variantViewModel;
+                return View(productViewModel.variantDisplay);
+                //return RedirectToAction("ShowVariant", new { variantID = variantDTO.ID });
+            }
+            catch(Exception ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
         }
     }

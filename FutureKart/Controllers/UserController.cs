@@ -1,5 +1,6 @@
 ﻿using FutureKart.Business;
 using FutureKart.Shared.Exceptions;
+using FutureKart.View_Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +24,11 @@ namespace FutureKart.Controllers
 
         public ActionResult CheckAdmin()
         {
+           
             try
             {
-                if(Session["UserID"].ToString() == null){
-                    throw new NotLoggedInException();
+                if(Session["UserID"] == null){
+                    throw new NotLoggedInException("User Not Logged In");
                 }
                 
                 if (userBusinessContext.CheckAdmin(new Guid(Session["UserID"].ToString())))
@@ -40,11 +42,11 @@ namespace FutureKart.Controllers
             }
             catch(NotLoggedInException ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
             catch (Exception ex)
             {
-                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex });
+                return RedirectToAction("ExceptionCatch", "Static", new { exception = ex.Message });
             }
         }
 
